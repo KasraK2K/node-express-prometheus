@@ -2,7 +2,7 @@ import express, { json, urlencoded, request, response } from "express"
 import responseTime from "response-time"
 import cors from "cors"
 import compression from "compression"
-// import mongoCrud from "./crud.js"
+import mongoCrud from "./crud.js"
 import { startMetricsServer, restResponseTimeHistogram } from "./metrics.js"
 
 const app = express()
@@ -34,14 +34,14 @@ app.use(
   )
 )
 
-// app.post("/find-all", mongoCrud.findAll)
-// app.post("/find-one", mongoCrud.findOne)
-// app.post("/create", mongoCrud.create)
-// app.post("/create-many", mongoCrud.createMany)
-// app.patch("/update", mongoCrud.update)
-// app.put("/upsert", mongoCrud.upsert)
-// app.put("/replace-one", mongoCrud.replaceOne)
-// app.delete("/delete-one", mongoCrud.deleteOne)
+app.post("/find-all", mongoCrud.findAll)
+app.post("/find-one", mongoCrud.findOne)
+app.post("/create", mongoCrud.create)
+app.post("/create-many", mongoCrud.createMany)
+app.patch("/update", mongoCrud.update)
+app.put("/upsert", mongoCrud.upsert)
+app.put("/replace-one", mongoCrud.replaceOne)
+app.delete("/delete-one", mongoCrud.deleteOne)
 
 startMetricsServer()
 
