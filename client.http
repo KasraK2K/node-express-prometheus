@@ -1,0 +1,130 @@
+@protocol = http
+@hostname = {{protocol}}://localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+@database = promethus
+@collection = app
+@id = "644e57677319fa3f2b0a41de"
+
+### ------------------------------- Find All ------------------------------- ###
+POST {{host}}/find-all HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "selector": {}
+}
+
+### ------------------------------- Find One ------------------------------- ###
+POST {{host}}/find-one HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "selector": {
+    "_id": {{id}}
+  }
+}
+
+### -------------------------------- Create -------------------------------- ###
+POST {{host}}/create HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "doc": {
+    "api": "create",
+    "name": "Kasra",
+    "age": 37
+  }
+}
+
+### ------------------------------ Create Many ----------------------------- ###
+POST {{host}}/create-many HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "docs": [
+    {
+      "api": "create many",
+      "name": "Kasra",
+      "age": 37
+    },
+    {
+      "api": "create many",
+      "name": "Kasra",
+      "age": 38
+    }
+  ]
+}
+
+### -------------------------------- Update -------------------------------- ###
+PATCH {{host}}/update HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "doc": {
+    "api": "update",
+    "name": "Kasra",
+    "age": 38
+  },
+  "selector": {
+    "_id": {{id}}
+  }
+}
+
+### -------------------------------- Upsert -------------------------------- ###
+PUT {{host}}/upsert HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "doc": {
+    "api": "upsert",
+    "name": "Kasra 2",
+    "age": 38
+  },
+  "selector": {
+    "_id": {{id}}
+  }
+}
+
+### ------------------------------ Replace One ----------------------------- ###
+PUT {{host}}/replace-one HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "doc": {
+    "message": "replace one"
+  },
+  "selector": {
+    "_id": {{id}}
+  }
+}
+
+### ------------------------------ Delete One ------------------------------ ###
+DELETE {{host}}/delete-one HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "database": "{{database}}",
+  "collection": "{{collection}}",
+  "selector": {
+    "_id": {{id}}
+  }
+}
+
+### -------------------------------- Metrics ------------------------------- ###
+GET http://localhost:9100/metrics HTTP/1.1
+content-type: {{contentType}}
